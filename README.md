@@ -4,7 +4,48 @@
 ### AI-Powered Dynamic Pricing Economic Simulation Platform
 
 ---
-
+## Folder-Structure of Src and Purpose
+<pre>
+src/
+├── assets/            # Static files (images, fonts, etc.)
+│   └── (images from the recent commit)<br>
+│
+├── components/          # Reusable UI components
+│   ├── Dashboard/       # Main simulation dashboard
+│   ├── Charts/          # Recharts/D3 visualization components
+│   ├── SimulationForm/  # Input forms for configuration
+│   ├── StrategyCard/    # Pricing strategy selection cards
+│   └── ComparisonView/  # Strategy comparison interface
+│
+├── pages/               # Page-level components
+│   ├── Home.jsx         # Landing page
+│   ├── Simulation.jsx   # Main simulation page
+│   └── Results.jsx      # Results and analysis page
+│
+├── services/            # API communication layer
+│   ├── api.js           # Axios/fetch setup for backend calls
+│   └── simulationService.js  # Functions to call /api/simulations
+│
+├── hooks/               # Custom React hooks
+│   ├── useSimulation.js # Hook to manage simulation state
+│   └── useChartData.js  # Hook to format data for charts
+│
+├── utils/               # Helper functions
+│   ├── calculations.js  # Frontend math helpers
+│   ├── formatters.js    # Format currency, percentages
+│   └── validators.js    # Form validation utilities
+│
+├── context/             # Global state management
+│   └── SimulationContext.jsx  # Share simulation data across components
+│
+├── styles/              # CSS / Tailwind styles
+│   └── index.css        # Tailwind directives and global styles
+│
+├── App.jsx              # Main application component with routing
+├── main.jsx             # Entry point - renders App to DOM
+├── index.css            # Global styles
+└── vite.config.js       # Vite configuration (located in root)
+</pre>
 ##  One-line Description
 
 ElasticEdge is an AI-powered economic simulation platform that enables businesses to experiment with dynamic pricing strategies under realistic market conditions including demand elasticity, competitor behavior, and inventory constraints.
