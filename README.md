@@ -21,7 +21,7 @@ src/
 │   ├── Simulation.jsx   # Main simulation page
 │   └── Results.jsx      # Results and analysis page
 │
-├── services/            # API communication
+├── services/            # API communication layer
 │   ├── api.js           # Axios/fetch setup for backend calls
 │   └── simulationService.js  # Functions to call /api/simulations
 │
@@ -32,18 +32,18 @@ src/
 ├── utils/               # Helper functions
 │   ├── calculations.js  # Frontend math helpers
 │   ├── formatters.js    # Format currency, percentages
-│   └── validators.js    # Form validation
+│   └── validators.js    # Form validation utilities
 │
-├── context/             # React Context for global state
+├── context/             # Global state management
 │   └── SimulationContext.jsx  # Share simulation data across components
 │
-├── styles/              # CSS/Tailwind styles
-│   └── index.css        # Main stylesheet with Tailwind directives
+├── styles/              # CSS / Tailwind styles
+│   └── index.css        # Tailwind directives and global styles
 │
-├── App.jsx              # Main app component with routing
+├── App.jsx              # Main application component with routing
 ├── main.jsx             # Entry point - renders App to DOM
 ├── index.css            # Global styles
-└── vite.config.js       # Vite configuration (in root, not src)
+└── vite.config.js       # Vite configuration (located in root)
 
 ##  One-line Description
 
