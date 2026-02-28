@@ -114,6 +114,8 @@ The system integrates:
 
 #  System Architecture
 
+<img src="./images/ER.png">
+
 ## High-Level Flow
 
 User → Frontend → Backend → Simulation Engine → Database → API Response → Visualization
