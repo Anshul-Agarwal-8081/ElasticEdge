@@ -4,6 +4,46 @@
 ### AI-Powered Dynamic Pricing Economic Simulation Platform
 
 ---
+# Folder-Structure of Src and Purpose
+src/
+├── assets/              # Static files (images, fonts, etc.)
+│   └── (images from the recent commit)
+│
+├── components/          # Reusable UI components
+│   ├── Dashboard/       # Main simulation dashboard
+│   ├── Charts/          # Recharts/D3 visualization components
+│   ├── SimulationForm/  # Input forms for configuration
+│   ├── StrategyCard/    # Pricing strategy selection cards
+│   └── ComparisonView/  # Strategy comparison interface
+│
+├── pages/               # Page-level components
+│   ├── Home.jsx         # Landing page
+│   ├── Simulation.jsx   # Main simulation page
+│   └── Results.jsx      # Results and analysis page
+│
+├── services/            # API communication
+│   ├── api.js           # Axios/fetch setup for backend calls
+│   └── simulationService.js  # Functions to call /api/simulations
+│
+├── hooks/               # Custom React hooks
+│   ├── useSimulation.js # Hook to manage simulation state
+│   └── useChartData.js  # Hook to format data for charts
+│
+├── utils/               # Helper functions
+│   ├── calculations.js  # Frontend math helpers
+│   ├── formatters.js    # Format currency, percentages
+│   └── validators.js    # Form validation
+│
+├── context/             # React Context for global state
+│   └── SimulationContext.jsx  # Share simulation data across components
+│
+├── styles/              # CSS/Tailwind styles
+│   └── index.css        # Main stylesheet with Tailwind directives
+│
+├── App.jsx              # Main app component with routing
+├── main.jsx             # Entry point - renders App to DOM
+├── index.css            # Global styles
+└── vite.config.js       # Vite configuration (in root, not src)
 
 ##  One-line Description
 
