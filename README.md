@@ -5,13 +5,13 @@
 
 ---
 
-## 🚀 One-line Description
+##  One-line Description
 
 ElasticEdge is an AI-powered economic simulation platform that enables businesses to experiment with dynamic pricing strategies under realistic market conditions including demand elasticity, competitor behavior, and inventory constraints.
 
 ---
 
-# 📌 Problem Statement
+#  Problem Statement
 
 ## Problem Title
 
@@ -38,7 +38,7 @@ Without predictive simulation, pricing experimentation carries significant finan
 
 ---
 
-# 🎯 Target Users
+#  Target Users
 
 * E-commerce businesses
 * MBA students (Economics / Strategy)
@@ -48,7 +48,7 @@ Without predictive simulation, pricing experimentation carries significant finan
 
 ---
 
-# 🔍 Existing Gaps
+#  Existing Gaps
 
 | Current Methods          | Limitations                   |
 | ------------------------ | ----------------------------- |
@@ -59,7 +59,7 @@ Without predictive simulation, pricing experimentation carries significant finan
 
 ---
 
-# 🧠 Problem Understanding & Approach
+#  Problem Understanding & Approach
 
 ## Root Cause Analysis
 
@@ -80,7 +80,7 @@ Build a **modular economic simulation engine** that:
 
 ---
 
-# 💡 Proposed Solution
+#  Proposed Solution
 
 ## Solution Overview
 
@@ -98,7 +98,7 @@ The system integrates:
 
 ---
 
-# ✨ Key Features
+#  Key Features
 
 * Interactive pricing control panel
 * Demand elasticity modeling
@@ -112,7 +112,7 @@ The system integrates:
 
 ---
 
-# 🏗 System Architecture
+#  System Architecture
 
 ## High-Level Flow
 
@@ -129,7 +129,7 @@ User → Frontend → Backend → Simulation Engine → Database → API Respons
 
 ---
 
-# 🗄 Database Design
+# Database Design
 
 ## Entities
 
@@ -148,7 +148,7 @@ User → Frontend → Backend → Simulation Engine → Database → API Respons
 
 ---
 
-# 📊 Dataset
+# Dataset
 
 ## Dataset Name
 
@@ -172,7 +172,7 @@ Synthetic data allows controlled experimentation.
 
 ---
 
-# 🔄 Preprocessing Steps
+#  Preprocessing Steps
 
 * Normalization of price variables
 * Scaling elasticity parameters
@@ -181,7 +181,7 @@ Synthetic data allows controlled experimentation.
 
 ---
 
-# 📈 Model Design
+#  Model Design
 
 ## Model Name
 
@@ -195,35 +195,7 @@ Elastic Demand Simulation Model with Competitor Reaction
 
 ---
 
-## 📌 Mathematical Models
 
-### Demand Model
-
-[
-Q = a \cdot P^{-b}
-]
-
-Where:
-
-* Q = Quantity demanded
-* P = Price
-* a = Demand scaling factor
-* b = Elasticity coefficient
-
----
-
-### Competitor Reaction Model
-
-[
-P_c(t) = P_c(t-1) + r(P(t-1) - P_c(t-1))
-]
-
-Where:
-
-* Pc = Competitor price
-* r = Reaction sensitivity
-
----
 
 ## Alternatives Considered
 
@@ -233,7 +205,7 @@ Where:
 
 ---
 
-# 📏 Evaluation Metrics
+#  Evaluation Metrics
 
 * Total Revenue
 * Total Profit
@@ -243,7 +215,7 @@ Where:
 
 ---
 
-# 🛠 Technology Stack
+#  Technology Stack
 
 ## Frontend
 
@@ -266,59 +238,39 @@ Where:
 
 ---
 
-# 📡 API Documentation
 
-## 1️⃣ Run Simulation
 
-```
-POST /api/simulate
-```
+# Module-wise Development Plan
 
-## 2️⃣ Get Simulation Results
-
-```
-GET /api/results/{simulation_id}
-```
-
-## 3️⃣ Compare Strategies
-
-```
-POST /api/compare
-```
-
----
-
-# 🧩 Module-wise Development Plan
-
-## ✅ Checkpoint 1: Research & Planning
+## Checkpoint 1: Research & Planning
 
 * Economic model design
 * Architecture design
 * UI wireframes
 
-## ✅ Checkpoint 2: Backend Development
+## Checkpoint 2: Backend Development
 
 * Simulation engine
 * API endpoints
 * Database schema
 
-## ✅ Checkpoint 3: Frontend Development
+## Checkpoint 3: Frontend Development
 
 * Interactive dashboard
 * Chart integration
 * Strategy selection UI
 
-## ✅ Checkpoint 4: AI Mode Development
+## Checkpoint 4: AI Mode Development
 
 * Reinforcement learning pricing agent
 * Performance evaluation
 
-## ✅ Checkpoint 5: Model Integration
+## Checkpoint 5: Model Integration
 
 * API-model connection
 * Real-time simulation updates
 
-## ✅ Checkpoint 6: Deployment
+## Checkpoint 6: Deployment
 
 * Docker containerization
 * Cloud deployment
@@ -326,7 +278,7 @@ POST /api/compare
 
 ---
 
-# 🔄 End-to-End Workflow
+#  End-to-End Workflow
 
 1. User logs in
 2. Configures product & market parameters
@@ -339,7 +291,7 @@ POST /api/compare
 
 ---
 
-# 🎯 Deliverables
+# Deliverables
 
 * Functional simulation engine
 * Interactive dashboard
@@ -348,7 +300,7 @@ POST /api/compare
 
 ---
 
-# 🔮 Future Scope
+# Future Scope
 
 * Customer segmentation modeling
 * Shock event simulation
@@ -360,7 +312,7 @@ POST /api/compare
 
 ---
 
-# ⚠ Known Limitations
+# Known Limitations
 
 * Uses synthetic data
 * Assumes rational competitor behavior
@@ -369,7 +321,7 @@ POST /api/compare
 
 ---
 
-# 🌍 Impact
+# 🌍Impact
 
 * Enables risk-free pricing experimentation
 * Reduces financial uncertainty
@@ -379,18 +331,4 @@ POST /api/compare
 
 ---
 
-# 📌 License
 
-MIT License
-
----
-
-If you'd like, I can also:
-
-* Add installation instructions
-* Add folder structure
-* Add contribution guidelines
-* Make it more startup-investor friendly
-* Make it more academic-project friendly
-
-Just tell me your use case 👌
