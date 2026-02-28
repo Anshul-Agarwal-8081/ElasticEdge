@@ -4,10 +4,11 @@
 ### AI-Powered Dynamic Pricing Economic Simulation Platform
 
 ---
-# Folder-Structure of Src and Purpose
+## Folder-Structure of Src and Purpose
+<pre>
 src/
-├── assets/              # Static files (images, fonts, etc.)
-│   └── (images from the recent commit)
+├── assets/            # Static files (images, fonts, etc.)
+│   └── (images from the recent commit)<br>
 │
 ├── components/          # Reusable UI components
 │   ├── Dashboard/       # Main simulation dashboard
@@ -44,7 +45,7 @@ src/
 ├── main.jsx             # Entry point - renders App to DOM
 ├── index.css            # Global styles
 └── vite.config.js       # Vite configuration (located in root)
-
+</pre>
 ##  One-line Description
 
 ElasticEdge is an AI-powered economic simulation platform that enables businesses to experiment with dynamic pricing strategies under realistic market conditions including demand elasticity, competitor behavior, and inventory constraints.
