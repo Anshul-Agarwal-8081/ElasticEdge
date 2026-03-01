@@ -268,16 +268,15 @@ Elastic Demand Simulation Model with Competitor Reaction
 
 ## Backend
 
-* Python (FastAPI)
+*  JavaScript
 
 ## Database
 
-* PostgreSQL
+* Supabase
 
 ## Deployment
 
-* Docker
-* AWS / Render / Railway
+* Netlify
 
 ---
 
@@ -314,8 +313,7 @@ Elastic Demand Simulation Model with Competitor Reaction
 * Real-time simulation updates
 
 ## Checkpoint 6: Deployment
-
-* Docker containerization
+ 
 * Cloud deployment
 * Live demo
 
