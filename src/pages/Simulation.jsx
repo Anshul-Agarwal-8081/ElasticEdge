@@ -7,7 +7,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 export default function Simulation() {
     const location = useLocation();
     const navigate = useNavigate();
-    const { updateProductPrice } = useContext(ProductContext);
+    const { updateProductPrice, dailyActuals } = useContext(ProductContext);
     const [product, setProduct] = useState(location.state?.product || null);
     const [kFactor, setKFactor] = useState(0.3); // default K
     const [recommendedPrice, setRecommendedPrice] = useState(0);
@@ -26,12 +26,13 @@ export default function Simulation() {
         const demand = parseFloat(product['Market Demand']);
         const expectedSales = demand * 100 * (1 - (kFactor * 0.5));
         const projectedRevenue = expectedSales * recommendedPrice;
+        const history = dailyActuals[product['Product Name']];
 
         return {
-            simRevenue: generateTimeSeriesData(projectedRevenue, expectedSales, 30),
-            simSales: generateTimeSeriesData(expectedSales, expectedSales, 30)
+            simRevenue: generateTimeSeriesData(projectedRevenue, expectedSales, 31, history),
+            simSales: generateTimeSeriesData(expectedSales, expectedSales, 31, history)
         };
-    }, [product, recommendedPrice, kFactor]);
+    }, [product, recommendedPrice, kFactor, dailyActuals]);
 
     if (!product) return null;
 
@@ -62,19 +63,19 @@ export default function Simulation() {
                         <div className="mb-8 space-y-1">
                             <div className="flex justify-between py-3 border-b border-beige-200/60">
                                 <span className="text-sage-400 font-semibold text-sm uppercase tracking-wider">Current Mark</span>
-                                <span className="font-bold text-sage-700 font-mono">${currentPrice.toFixed(2)}</span>
+                                <span className="font-bold text-sage-700 font-opensans">${currentPrice.toFixed(2)}</span>
                             </div>
                             <div className="flex justify-between py-3 border-b border-beige-200/60">
                                 <span className="text-sage-400 font-semibold text-sm uppercase tracking-wider">Market Avg</span>
-                                <span className="font-bold text-sage-700 font-mono">${parseFloat(product['Market Price']).toFixed(2)}</span>
+                                <span className="font-bold text-sage-700 font-opensans">${parseFloat(product['Market Price']).toFixed(2)}</span>
                             </div>
                             <div className="flex justify-between py-3 border-b border-beige-200/60">
                                 <span className="text-sage-400 font-semibold text-sm uppercase tracking-wider">Cost Basis</span>
-                                <span className="font-bold text-sage-700 font-mono">${costPrice.toFixed(2)}</span>
+                                <span className="font-bold text-sage-700 font-opensans">${costPrice.toFixed(2)}</span>
                             </div>
                             <div className="flex justify-between py-3">
                                 <span className="text-sage-400 font-semibold text-sm uppercase tracking-wider">Demand Idx</span>
-                                <span className={`font-bold font-mono ${parseFloat(product['Market Demand']) > 0.6 ? 'text-[#558455]' : 'text-[#a46565]'}`}>
+                                <span className={`font-bold font-opensans ${parseFloat(product['Market Demand']) > 0.6 ? 'text-[#558455]' : 'text-[#a46565]'}`}>
                                     {product['Market Demand']}
                                 </span>
                             </div>
@@ -83,7 +84,7 @@ export default function Simulation() {
                         <div className="mb-10">
                             <label className="flex justify-between items-center text-sage-800 font-bold mb-4 tracking-wide text-sm">
                                 Action Threshold K
-                                <span className="text-sage-500 bg-beige-100 px-3 py-1 rounded-lg border border-beige-300 text-xs">{kFactor.toFixed(2)}</span>
+                                <span className="text-sage-500 bg-beige-100 px-3 py-1 rounded-lg border border-beige-300 text-xs font-opensans">{kFactor.toFixed(2)}</span>
                             </label>
                             <input
                                 type="range"
@@ -102,9 +103,9 @@ export default function Simulation() {
                             <div className="absolute top-0 right-0 w-32 h-32 bg-white rounded-full blur-2xl opacity-40 -mr-10 -mt-10 pointer-events-none"></div>
 
                             <h3 className="text-[#658a65] font-bold uppercase text-xs tracking-widest mb-3 relative z-10">Optimal Target Price</h3>
-                            <p className="text-6xl font-serif font-bold text-[#3B4D3C] mb-4 relative z-10">${recommendedPrice.toFixed(2)}</p>
+                            <p className="text-6xl font-serif font-bold text-[#3B4D3C] mb-4 relative z-10 font-opensans">${recommendedPrice.toFixed(2)}</p>
                             <div className="flex justify-center relative z-10">
-                                <span className={`px-4 py-1.5 rounded-full text-xs font-bold shadow-sm border ${profitMargin > 0 ? 'bg-white text-[#5f875f] border-[#dcebdc]' : 'bg-[#fdf4f4] text-[#a46565] border-[#f5dede]'}`}>
+                                <span className={`px-4 py-1.5 rounded-full text-xs font-bold shadow-sm border font-opensans ${profitMargin > 0 ? 'bg-white text-[#5f875f] border-[#dcebdc]' : 'bg-[#fdf4f4] text-[#a46565] border-[#f5dede]'}`}>
                                     Margin: ${profitMargin.toFixed(2)} /unit
                                 </span>
                             </div>
@@ -128,33 +129,33 @@ export default function Simulation() {
                         <h2 className="text-xl font-serif font-bold mb-8 text-sage-900">Projected Value Capture (30 Days)</h2>
                         <div className="h-72 w-full">
                             <ResponsiveContainer width="100%" height="100%">
-                                <LineChart data={simRevenue} margin={{ left: -20, right: 10 }}>
+                                <LineChart data={simRevenue} margin={{ left: 0, right: 10, bottom: 20, top: 10 }}>
                                     <CartesianGrid strokeDasharray="4 4" stroke="#E5E1DA" vertical={false} />
-                                    <XAxis dataKey="day" tick={{ fill: '#948a7b', fontSize: 13, fontFamily: 'Inter' }} tickLine={false} axisLine={false} dy={10} />
-                                    <YAxis dataKey="revenue" tick={{ fill: '#948a7b', fontSize: 13, fontFamily: 'Inter' }} tickLine={false} axisLine={false} tickFormatter={(tick) => `$${tick / 1000}k`} />
+                                    <XAxis dataKey="day" tick={{ fill: '#948a7b', fontSize: 13, fontFamily: 'Inter' }} tickLine={false} axisLine={false} dy={10} label={{ value: 'Timeline (Days)', position: 'insideBottom', offset: -10, fill: '#948a7b', fontSize: 12, fontWeight: 600 }} />
+                                    <YAxis dataKey="revenue" tick={{ fill: '#948a7b', fontSize: 13, fontFamily: 'Inter' }} tickLine={false} axisLine={false} tickFormatter={(tick) => `$${tick / 1000}k`} label={{ value: 'Revenue ($)', angle: -90, position: 'insideLeft', offset: 15, fill: '#948a7b', fontSize: 12, fontWeight: 600 }} />
                                     <Tooltip
                                         contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 30px -4px rgba(0, 0, 0, 0.08)', fontFamily: 'Inter', fontWeight: 600 }}
                                         itemStyle={{ color: '#3B4D3C' }}
                                     />
-                                    <Line type="monotone" dataKey="revenue" stroke="#758f76" strokeWidth={4} dot={false} activeDot={{ r: 6, fill: '#3B4D3C', strokeWidth: 0 }} animationDuration={1000} />
+                                    <Line type="monotone" dataKey="revenue" stroke="#758f76" strokeWidth={4} dot={(props) => props.payload.isActual ? <circle cx={props.cx} cy={props.cy} r={6} fill="#3B4D3C" stroke="white" strokeWidth={2} /> : false} activeDot={{ r: 8 }} animationDuration={1000} />
                                 </LineChart>
                             </ResponsiveContainer>
                         </div>
                     </div>
 
                     <div className="bg-white p-8 rounded-2xl shadow-soft border border-beige-500/50">
-                        <h2 className="text-xl font-serif font-bold mb-8 text-sage-900">Projected Volume (30 Days)</h2>
+                        <h2 className="text-xl font-serif font-bold mb-8 text-sage-900">Projected Volume (31 Days)</h2>
                         <div className="h-72 w-full">
                             <ResponsiveContainer width="100%" height="100%">
-                                <LineChart data={simSales} margin={{ left: -20, right: 10 }}>
+                                <LineChart data={simSales} margin={{ left: 0, right: 10, bottom: 20, top: 10 }}>
                                     <CartesianGrid strokeDasharray="4 4" stroke="#E5E1DA" vertical={false} />
-                                    <XAxis dataKey="day" tick={{ fill: '#948a7b', fontSize: 13, fontFamily: 'Inter' }} tickLine={false} axisLine={false} dy={10} />
-                                    <YAxis dataKey="sales" tick={{ fill: '#948a7b', fontSize: 13, fontFamily: 'Inter' }} tickLine={false} axisLine={false} />
+                                    <XAxis dataKey="day" tick={{ fill: '#948a7b', fontSize: 13, fontFamily: 'Inter' }} tickLine={false} axisLine={false} dy={10} label={{ value: 'Timeline (Days)', position: 'insideBottom', offset: -10, fill: '#948a7b', fontSize: 12, fontWeight: 600 }} />
+                                    <YAxis dataKey="sales" tick={{ fill: '#948a7b', fontSize: 13, fontFamily: 'Inter' }} tickLine={false} axisLine={false} label={{ value: 'Units Sold', angle: -90, position: 'insideLeft', offset: 15, fill: '#948a7b', fontSize: 12, fontWeight: 600 }} />
                                     <Tooltip
                                         contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 30px -4px rgba(0, 0, 0, 0.08)', fontFamily: 'Inter', fontWeight: 600 }}
                                         itemStyle={{ color: '#b0a697' }}
                                     />
-                                    <Line type="monotone" dataKey="sales" stroke="#b0a697" strokeWidth={4} dot={false} activeDot={{ r: 6, fill: '#948a7b', strokeWidth: 0 }} animationDuration={1000} />
+                                    <Line type="monotone" dataKey="sales" stroke="#b0a697" strokeWidth={4} dot={(props) => props.payload.isActual ? <circle cx={props.cx} cy={props.cy} r={6} fill="#948a7b" stroke="white" strokeWidth={2} /> : false} activeDot={{ r: 8 }} animationDuration={1000} />
                                 </LineChart>
                             </ResponsiveContainer>
                         </div>

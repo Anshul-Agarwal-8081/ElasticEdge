@@ -21,22 +21,25 @@ export default function Landing() {
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (!isLogin && formData.password !== formData.confirmPassword) {
             alert("Passwords don't match");
             return;
         }
 
-        login({
-            username: formData.username || formData.email.split('@')[0],
-            email: formData.email,
-            stage: formData.stage
-        }, formData.sheetUrl);
+        try {
+            await login({
+                username: formData.username || formData.email.split('@')[0],
+                email: formData.email,
+                stage: formData.stage
+            }, formData.sheetUrl, formData.password, isLogin);
 
-        setTimeout(() => {
             navigate('/dashboard');
-        }, 100);
+        } catch (err) {
+            console.error("Authentication Error:", err);
+            alert(err.message || "Failed to initialize workspace. Please check your connection.");
+        }
     };
 
     return (
