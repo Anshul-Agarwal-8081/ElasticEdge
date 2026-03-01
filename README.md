@@ -361,3 +361,8 @@ Elastic Demand Simulation Model with Competitor Reaction
 ---
 
 
+DEMO VIDEO LINK-- https://drive.google.com/file/d/10SQseW9MKfkhOGBbAqML1Tc9R5is-kyt/view?usp=sharing
+
+DEPLOYED LINK-- https://cute-florentine-9bb258.netlify.app/
+
+PRESENTATION LINK-- https://drive.google.com/file/d/1qkknZyGSyjF5MF1ulOzKoM6qavVtF67h/view?usp=sharing
