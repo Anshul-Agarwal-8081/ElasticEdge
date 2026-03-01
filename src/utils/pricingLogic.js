@@ -34,10 +34,38 @@ export const needsRevision = (currentPrice, recommendedPrice) => {
     return diff > 0.05;
 };
 
-export const generateTimeSeriesData = (baseRevenue, baseSales, days = 30) => {
-    return Array.from({ length: days }, (_, i) => ({
-        day: i + 1,
-        revenue: Math.floor(baseRevenue * (1 + (Math.random() * 0.2 - 0.1))),
-        sales: Math.floor(baseSales * (1 + (Math.random() * 0.2 - 0.1)))
-    }));
+export const generateTimeSeriesData = (baseRevenue, baseSales, days = 31, history = null) => {
+    const today = new Date();
+
+    return Array.from({ length: days }, (_, i) => {
+        const dayNum = i + 1;
+        // We assume the window ends TODAY. 
+        // So index (days - 1) is Today.
+        const slotDate = new Date();
+        slotDate.setDate(today.getDate() - (days - 1 - i));
+        const dateStr = slotDate.toISOString().split('T')[0];
+
+        const historyData = history && history[dateStr];
+
+        if (historyData) {
+            return {
+                day: dayNum,
+                revenue: historyData.revenue || 0,
+                sales: historyData.units || 0,
+                isActual: true,
+                date: dateStr
+            };
+        }
+
+        // Projection logic for slots without history
+        // If the date is in the future relative to the latest history point, or just generic baseline
+        const variance = 1 + (Math.random() * 0.2 - 0.1);
+        return {
+            day: dayNum,
+            revenue: Math.floor(baseRevenue * variance),
+            sales: Math.floor(baseSales * variance),
+            isActual: false,
+            date: dateStr
+        };
+    });
 };

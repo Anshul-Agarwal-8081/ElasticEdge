@@ -15,7 +15,9 @@ export default function Workspace() {
     }, [products]);
 
     const salesData = useMemo(() => {
-        return selectedProduct ? generateTimeSeriesData(200, 150, 30) : [];
+        if (!selectedProduct) return [];
+        const isNew = selectedProduct['Days in Inventory'] === '0' || !selectedProduct['Days in Inventory'];
+        return generateTimeSeriesData(200, 150, 30, isNew);
     }, [selectedProduct]);
 
     return (

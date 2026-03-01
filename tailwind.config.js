@@ -33,6 +33,7 @@ export default {
         sans: ['Inter', 'sans-serif'],
         serif: ['Playfair Display', 'serif'],
         mono: ['Space Mono', 'monospace'],
+        opensans: ['Open Sans', 'sans-serif'],
       },
       boxShadow: {
         'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
